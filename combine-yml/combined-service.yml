@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: microtask-categories-service
+  labels:
+    app: microtask-categories-api
+    service: microtask-categories-service
+spec:
+  selector:
+    service: microtask-categories-service
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microtask-comments-service
+  labels:
+    app: microtask-comments-api
+    service: microtask-comments-service
+spec:
+  selector:
+    service: microtask-comments-service
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microtask-tasks-service
+  labels:
+    app: microtask-tasks-api
+    service: microtask-tasks-service
+spec:
+  selector:
+    service: microtask-tasks-service
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microtask-users-service
+  labels:
+    app: microtask-users-api
+    service: microtask-users-service
+spec:
+  selector:
+    service: microtask-users-service
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

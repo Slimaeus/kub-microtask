@@ -1,0 +1,121 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microtask-categories-deployment
+  labels:
+    app: microtask-categories-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microtask-categories-api
+      service: microtask-categories-service
+  template:
+    metadata:
+      labels:
+        app: microtask-categories-api
+        service: microtask-categories-service
+    spec:
+      containers:
+      - name: microtask-services-categories-api
+        image: slimaeus/microtaskservicescategoriesapi
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microtask-comments-deployment
+  labels:
+    app: microtask-comments-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microtask-comments-api
+      service: microtask-comments-service
+  template:
+    metadata:
+      labels:
+        app: microtask-comments-api
+        service: microtask-comments-service
+    spec:
+      containers:
+      - name: microtask-services-comments-api
+        image: slimaeus/microtaskservicescommentsapi
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        env:
+          - name: TASKS_SERVICE
+            value: microtask-tasks-service.default
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microtask-tasks-deployment
+  labels:
+    app: microtask-tasks-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microtask-tasks-api
+      service: microtask-tasks-service
+  template:
+    metadata:
+      labels:
+        app: microtask-tasks-api
+        service: microtask-tasks-service
+    spec:
+      containers:
+      - name: microtask-services-tasks-api
+        image: slimaeus/microtaskservicestasksapi
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        env:
+          - name: CATEGORIES_SERVICE
+            value: microtask-categories-service.default
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microtask-users-deployment
+  labels:
+    app: microtask-users-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microtask-users-api
+      service: microtask-users-service
+  template:
+    metadata:
+      labels:
+        app: microtask-users-api
+        service: microtask-users-service
+    spec:
+      containers:
+      - name: microtask-services-users-api
+        image: slimaeus/microtaskservicesusersapi
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

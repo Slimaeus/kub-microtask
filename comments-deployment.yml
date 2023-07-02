@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microtask-comments-deployment
+  labels:
+    app: microtask-comments-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microtask-comments-api
+      service: microtask-comments-service
+  template:
+    metadata:
+      labels:
+        app: microtask-comments-api
+        service: microtask-comments-service
+    spec:
+      containers:
+      - name: microtask-services-comments-api
+        image: slimaeus/microtaskservicescommentsapi
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        env:
+          - name: TASKS_SERVICE
+            value: microtask-tasks-service.default
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

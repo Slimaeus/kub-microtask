@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microtask-users-deployment
+  labels:
+    app: microtask-users-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microtask-users-api
+      service: microtask-users-service
+  template:
+    metadata:
+      labels:
+        app: microtask-users-api
+        service: microtask-users-service
+    spec:
+      containers:
+      - name: microtask-services-users-api
+        image: slimaeus/microtaskservicesusersapi
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

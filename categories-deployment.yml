@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microtask-categories-deployment
+  labels:
+    app: microtask-categories-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microtask-categories-api
+      service: microtask-categories-service
+  template:
+    metadata:
+      labels:
+        app: microtask-categories-api
+        service: microtask-categories-service
+    spec:
+      containers:
+      - name: microtask-services-categories-api
+        image: slimaeus/microtaskservicescategoriesapi
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
