@@ -54,6 +54,8 @@ spec:
         env:
           - name: TASKS_SERVICE
             value: microtask-tasks-service.default
+          - name: USERS_SERVICE
+            value: microtask-users-service.default
         resources:
           limits:
             memory: "128Mi"
@@ -86,6 +88,8 @@ spec:
         env:
           - name: CATEGORIES_SERVICE
             value: microtask-categories-service.default
+          - name: USERS_SERVICE
+            value: microtask-users-service.default
         resources:
           limits:
             memory: "128Mi"
